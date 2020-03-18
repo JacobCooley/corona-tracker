@@ -47,8 +47,6 @@ export function Setup() {
         />
       )}
       <Text>Set Date: {date && displayDate(date)}</Text>
-      <Text>Current Date: {displayDate()}</Text>
-      {/*<Text>SubDate: {(new Date().getTime() - date.getTime()) / 1000 / 60 / 60 / 24 }</Text>*/}
     </View>
   );
 }

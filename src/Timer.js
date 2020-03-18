@@ -5,7 +5,7 @@ import AppContext from "./Context";
 
 export function Timer() {
   const [start, setStart] = useState(false);
-  const { date, setState } = useContext(AppContext);
+  const { date } = useContext(AppContext);
   const startTime = new Date().getTime() - date.getTime()
   return (
     <View style={styles.container}>

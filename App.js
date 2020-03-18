@@ -18,11 +18,11 @@ const App = () => {
   useEffect(() => {
     (async () => {
       const current = (await AsyncStorage.getItem("coronaDate")) || null;
-      console.log("cur", new Date(parseFloat(current)));
       setState({ date: new Date(parseFloat(current)) });
+      console.log("sefft");
     })();
   }, []);
-  console.log("state", state);
+  console.log("state", state.date);
   return (
     <AppContext.Provider value={{ ...state, setState }}>
       <View style={styles.container}>
@@ -33,10 +33,12 @@ const App = () => {
             <Timer />
           </>
         ) : (
-          <>
-            <Button title={"Timer"} onPress={() => setPage(Pages.TIMER)} />
-            <Setup />
-          </>
+          page === Pages.SETUP && (
+            <>
+              <Button title={"Timer"} onPress={() => setPage(Pages.TIMER)} />
+              <Setup />
+            </>
+          )
         )}
       </View>
     </AppContext.Provider>
