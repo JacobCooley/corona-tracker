@@ -1,14 +1,25 @@
 import React, { useReducer, useState, useEffect } from "react";
-import { StyleSheet, Text, Button, View } from "react-native";
-import { Setup } from "./src/Setup";
-import AppContext, { AppInitialValues } from "./src/Context";
-import { Timer } from "./src/Timer";
-import { AsyncStorage } from "react-native";
+import { Setup } from "./src/components/Setup";
+import AppContext, { AppInitialValues } from "./src/context";
+import { Timer } from "./src/components/Timer";
+import { AsyncStorage, View } from "react-native";
+import { FlexRow, Container, StyledButton } from "./src/styles";
+import { Faq } from "./src/components/Faq";
+import styled from "styled-components";
 
 const Pages = {
   TIMER: 0,
-  SETUP: 1
+  SETUP: 1,
+  FAQ: 2
 };
+
+const ButtonView = styled(FlexRow)`
+  justify-content: space-around;
+  align-items: flex-end;
+  width: 100%;
+  margin-bottom: 40px;
+  height: 150px;
+`;
 const App = () => {
   const [page, setPage] = useState(Pages.TIMER);
   const [state, setState] = useReducer(
@@ -18,51 +29,47 @@ const App = () => {
   useEffect(() => {
     (async () => {
       const current = (await AsyncStorage.getItem("coronaDate")) || null;
-      setState({ date: new Date(parseFloat(current)) });
-      console.log("sefft");
+      if (current) setState({ date: new Date(parseFloat(current)) });
     })();
   }, []);
-  console.log("state", state.date);
+
+  const NavButtons =
+    page === Pages.TIMER ? (
+      <StyledButton title={"Setup"} onPress={() => setPage(Pages.SETUP)} />
+    ) : (
+      (page === Pages.SETUP || page === Pages.FAQ) && (
+        <StyledButton title={"Timer"} onPress={() => setPage(Pages.TIMER)} />
+      )
+    );
+
+  const Body =
+    page === Pages.TIMER && state.date ? (
+      <>
+        <Timer />
+      </>
+    ) : page === Pages.FAQ ? (
+      <>
+        <Faq />
+      </>
+    ) : (
+      page === Pages.SETUP && (
+        <>
+          <Setup />
+        </>
+      )
+    );
+
   return (
     <AppContext.Provider value={{ ...state, setState }}>
-      <View style={styles.container}>
-        <Text>Coronavirus Stopwatch</Text>
-        {page === Pages.TIMER && state.date ? (
-          <>
-            <Button title={"Setup"} onPress={() => setPage(Pages.SETUP)} />
-            <Timer />
-          </>
-        ) : (
-          page === Pages.SETUP && (
-            <>
-              <Button title={"Timer"} onPress={() => setPage(Pages.TIMER)} />
-              <Setup />
-            </>
-          )
-        )}
-      </View>
+      <Container style={{ padding: 0 }}>
+        <View style={{ display: 'flex', flex: 5, width: "100%", alignItems: 'center', justifyContent: 'center'}}>{Body}</View>
+        <ButtonView>
+          {NavButtons}
+          <StyledButton title={"FAQ"} onPress={() => setPage(Pages.FAQ)} />
+        </ButtonView>
+      </Container>
     </AppContext.Provider>
   );
 };
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: "center",
-    alignItems: "center",
-    backgroundColor: "#F5FCFF",
-    marginTop: 40
-  },
-  welcome: {
-    fontSize: 20,
-    textAlign: "center",
-    margin: 10
-  },
-  instructions: {
-    textAlign: "center",
-    color: "#333333",
-    marginBottom: 5
-  }
-});
 
 export default App;
