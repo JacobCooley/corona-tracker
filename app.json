@@ -12,6 +12,14 @@
       "ios",
       "android",
       "web"
-    ]
+    ],
+    "ios": {
+      "bundleIdentifier": "com.coronavirus.stopwatch",
+      "buildNumber": "1.0.0"
+    },
+    "android": {
+      "package": "com.coronavirus.stopwatch",
+      "versionCode": 1
+    }
   }
 }
