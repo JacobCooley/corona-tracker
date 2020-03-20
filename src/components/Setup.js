@@ -12,11 +12,20 @@ export function Setup() {
     return date.toDateString() + " - " + date.toTimeString();
   };
   return (
-    <Container justifyContent={'center'}>
+    <Container justifyContent={"center"}>
       <Text>Set Date: {date && displayDate(date)}</Text>
-      <View style={{marginTop: 20, display: 'flex', flexDirection: 'row', width: '100%', justifyContent: 'space-evenly'}}>
-          <FlexCol>
-            <Text>Date of last exposure</Text>
+      <View
+        style={{
+          marginTop: 20,
+          display: "flex",
+          flexDirection: "row",
+          width: "100%",
+          justifyContent: "space-evenly"
+        }}
+      >
+        <FlexCol>
+          <Text>Date of last exposure</Text>
+          <View style={{ width: "90%" }}>
             <Button
               onPress={() => {
                 setMode("date");
@@ -24,18 +33,21 @@ export function Setup() {
               }}
               title={"Set Date"}
             />
-          </FlexCol>
-          <FlexCol>
-            <Text>Time of last exposure</Text>
-            <Button
-              onPress={() => {
-                setMode("time");
-                setShow(true);
-              }}
-              title={"Set Time"}
-            />
-          </FlexCol>
-        </View>
+          </View>
+        </FlexCol>
+        <FlexCol>
+          <Text>Time of last exposure</Text>
+          <View style={{ width: "90%" }}>
+          <Button
+            onPress={() => {
+              setMode("time");
+              setShow(true);
+            }}
+            title={"Set Time"}
+          />
+          </View>
+        </FlexCol>
+      </View>
       {show && (
         <DateTimePicker
           value={date || new Date()}

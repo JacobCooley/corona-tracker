@@ -62,10 +62,24 @@ const App = () => {
   return (
     <AppContext.Provider value={{ ...state, setState }}>
       <Container style={{ padding: 0 }}>
-        <View style={{ display: 'flex', flex: 5, width: "100%", alignItems: 'center', justifyContent: 'center'}}>{Body}</View>
+        <View
+          style={{
+            display: "flex",
+            flex: 5,
+            width: "100%",
+            alignItems: "center",
+            justifyContent: "center"
+          }}
+        >
+          {Body}
+        </View>
         <ButtonView>
-          {NavButtons}
-          <StyledButton title={"FAQ"} onPress={() => setPage(Pages.FAQ)} />
+          <View style={{ width: "30%" }}>{NavButtons}</View>
+          {page !== Pages.FAQ && (
+            <View style={{ width: "30%" }}>
+              <StyledButton title={"FAQ"} onPress={() => setPage(Pages.FAQ)} />
+            </View>
+          )}
         </ButtonView>
       </Container>
     </AppContext.Provider>

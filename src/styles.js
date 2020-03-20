@@ -35,4 +35,5 @@ export const Header = styled.Text`
 export const StyledButton = styled.Button`
   height: 60px;
   width: 200px;
+  flex: 1;
 `;

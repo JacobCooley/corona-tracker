@@ -34,9 +34,7 @@ export function Timer() {
   });
   
   useEffect(() => {
-    console.log("start");
     const timer = setInterval(() => {
-      console.log("state", state);
       if (state.sec !== 59) {
         setState({
           ...state,
@@ -66,7 +64,6 @@ export function Timer() {
       }
     }, 1000)
     return () => {
-      console.log("clear");
       if (timer) clearInterval(timer);
     };
   }, [state]);
@@ -90,7 +87,7 @@ export function Timer() {
             <ClockText>{padToTwo(state.sec)}</ClockText>
           </FlexRow>
           <Text style={{ flex: 1, fontSize: 18 }}>Since last exposure</Text>
-          <Text style={{ flex: 1, fontSize: 16 }}>You've saved {livesSaved} lives</Text>
+          <Text style={{ flex: 1, fontSize: 16 }}>You've saved {livesSaved.toFixed(2)} lives</Text>
         </>
       )}
     </Container>
