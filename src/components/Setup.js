@@ -1,8 +1,8 @@
 import React, { useState, useContext } from "react";
-import { StyleSheet, Text, Button, View, AsyncStorage } from "react-native";
+import { Text, Button, View, AsyncStorage } from "react-native";
 import DateTimePicker from "@react-native-community/datetimepicker";
 import AppContext from "../context";
-import { FlexRow, Container, FlexCol } from "../styles";
+import { Container, FlexCol } from "../styles";
 
 export function Setup() {
   const { date, setState } = useContext(AppContext);
@@ -13,7 +13,8 @@ export function Setup() {
   };
   return (
     <Container justifyContent={"center"}>
-      <Text>Set Date: {date && displayDate(date)}</Text>
+      <Text style={{fontSize: 22, textAlign: 'center', marginBottom: 20}}>Please enter the date and time since you've been in quarantine</Text>
+      {date && <Text>Set Date: {date && displayDate(date)}</Text>}
       <View
         style={{
           marginTop: 20,
@@ -38,16 +39,27 @@ export function Setup() {
         <FlexCol>
           <Text>Time of last exposure</Text>
           <View style={{ width: "90%" }}>
-          <Button
-            onPress={() => {
-              setMode("time");
-              setShow(true);
-            }}
-            title={"Set Time"}
-          />
+            <Button
+              onPress={() => {
+                setMode("time");
+                setShow(true);
+              }}
+              title={"Set Time"}
+            />
           </View>
         </FlexCol>
       </View>
+      {__DEV__ && (
+        <View style={{ marginTop: 20 }}>
+          <Button
+            onPress={async () => {
+              AsyncStorage.removeItem("coronaDate");
+              setState({ date: null });
+            }}
+            title={"Delete Date"}
+          />
+        </View>
+      )}
       {show && (
         <DateTimePicker
           value={date || new Date()}
@@ -68,12 +80,3 @@ export function Setup() {
     </Container>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: "center",
-    alignItems: "center",
-    backgroundColor: "#F5FCFF"
-  }
-});

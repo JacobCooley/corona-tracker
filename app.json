@@ -14,11 +14,11 @@
       "web"
     ],
     "ios": {
-      "bundleIdentifier": "com.coronavirus.stopwatch",
+      "bundleIdentifier": "com.qravr.cvstopwatch",
       "buildNumber": "1.0.0"
     },
     "android": {
-      "package": "com.coronavirus.stopwatch",
+      "package": "com.qravr.cvstopwatch",
       "versionCode": 1
     }
   }

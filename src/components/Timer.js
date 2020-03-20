@@ -1,7 +1,7 @@
 import React, { useContext, useState, useEffect, useRef } from "react";
 import AppContext from "../context";
 import { FlexRow, Container, Header } from "../styles";
-import { Text } from "react-native";
+import { Text, Button } from "react-native";
 import styled from "styled-components";
 
 const ClockText = styled.Text`
@@ -23,16 +23,15 @@ const Risk = styled.View`
   justify-content: center;
 `;
 export function Timer() {
-  const [timer, setTimer] = useState();
   const { date } = useContext(AppContext);
   const diff = new Date().getTime() - date.getTime();
   const [state, setState] = useState({
-    sec: 50, //Math.floor((diff / 1000) % 60),
+    sec: Math.floor((diff / 1000) % 60),
     min: Math.floor((diff / 1000 / 60) % 60),
     hour: Math.floor((diff / 1000 / 60 / 60) % 24),
     day: Math.floor(diff / 1000 / 60 / 60 / 24)
   });
-  
+
   useEffect(() => {
     const timer = setInterval(() => {
       if (state.sec !== 59) {
@@ -44,7 +43,7 @@ export function Timer() {
         setState({
           ...state,
           min: ++state.min,
-          sec: 0,
+          sec: 0
         });
       } else if (state.hour !== 23) {
         setState({
@@ -62,7 +61,7 @@ export function Timer() {
           day: ++state.day
         });
       }
-    }, 1000)
+    }, 1000);
     return () => {
       if (timer) clearInterval(timer);
     };
@@ -87,7 +86,9 @@ export function Timer() {
             <ClockText>{padToTwo(state.sec)}</ClockText>
           </FlexRow>
           <Text style={{ flex: 1, fontSize: 18 }}>Since last exposure</Text>
-          <Text style={{ flex: 1, fontSize: 16 }}>You've saved {livesSaved.toFixed(2)} lives</Text>
+          <Text style={{ flex: 1, fontSize: 16 }}>
+            You've saved {livesSaved.toFixed(2)} lives
+          </Text>
         </>
       )}
     </Container>

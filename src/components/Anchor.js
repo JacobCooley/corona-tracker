@@ -15,7 +15,7 @@ export default class Anchor extends React.Component {
         {...this.props}
         onPress={this._handlePress}
       >
-        {this.props.children}
+        {"\n\n"}{this.props.children}{"\n\n"}
       </Text>
     );
   }

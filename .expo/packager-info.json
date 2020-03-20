@@ -1,10 +1,10 @@
 {
   "devToolsPort": 19002,
-  "expoServerPort": 19000,
-  "packagerPort": 19001,
-  "packagerPid": 17058,
-  "expoServerNgrokUrl": "https://yv-ddg.jacobcooley.coronawatch.exp.direct",
-  "packagerNgrokUrl": "https://packager.yv-ddg.jacobcooley.coronawatch.exp.direct",
-  "ngrokPid": 17085,
+  "expoServerPort": null,
+  "packagerPort": null,
+  "packagerPid": null,
+  "expoServerNgrokUrl": null,
+  "packagerNgrokUrl": null,
+  "ngrokPid": null,
   "webpackServerPort": null
 }

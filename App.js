@@ -18,18 +18,23 @@ const ButtonView = styled(FlexRow)`
   align-items: flex-end;
   width: 100%;
   margin-bottom: 40px;
-  height: 150px;
+  height: 10%;
 `;
 const App = () => {
-  const [page, setPage] = useState(Pages.TIMER);
   const [state, setState] = useReducer(
     (currentState, newState) => ({ ...currentState, ...newState }),
     AppInitialValues
   );
+  const [page, setPage] = useState(null);
+
   useEffect(() => {
     (async () => {
       const current = (await AsyncStorage.getItem("coronaDate")) || null;
-      if (current) setState({ date: new Date(parseFloat(current)) });
+      if (current) {
+        setState({ date: new Date(parseFloat(current)) });
+        setPage(Pages.TIMER)
+      }
+      else setPage(Pages.SETUP);
     })();
   }, []);
 
@@ -37,24 +42,24 @@ const App = () => {
     page === Pages.TIMER ? (
       <StyledButton title={"Setup"} onPress={() => setPage(Pages.SETUP)} />
     ) : (
-      (page === Pages.SETUP || page === Pages.FAQ) && (
+      (page === Pages.SETUP || page === Pages.FAQ) &&
+      state.date && (
         <StyledButton title={"Timer"} onPress={() => setPage(Pages.TIMER)} />
       )
     );
-
   const Body =
     page === Pages.TIMER && state.date ? (
       <>
         <Timer />
       </>
-    ) : page === Pages.FAQ ? (
+    ) : page === Pages.SETUP || !state.date ? (
       <>
-        <Faq />
+        <Setup />
       </>
     ) : (
-      page === Pages.SETUP && (
+      page === Pages.FAQ && (
         <>
-          <Setup />
+          <Faq />
         </>
       )
     );
@@ -71,11 +76,11 @@ const App = () => {
             justifyContent: "center"
           }}
         >
-          {Body}
+          {page !== null ? Body : null}
         </View>
         <ButtonView>
           <View style={{ width: "30%" }}>{NavButtons}</View>
-          {page !== Pages.FAQ && (
+          {page !== Pages.FAQ && state.date && (
             <View style={{ width: "30%" }}>
               <StyledButton title={"FAQ"} onPress={() => setPage(Pages.FAQ)} />
             </View>
