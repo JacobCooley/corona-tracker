@@ -1,7 +1,7 @@
 import React, { useContext, useState, useEffect, useRef } from "react";
 import AppContext from "../context";
 import { FlexRow, Container, Header } from "../styles";
-import { Text, Button } from "react-native";
+import { Text, AppState } from "react-native";
 import styled from "styled-components";
 
 const ClockText = styled.Text`
@@ -24,13 +24,16 @@ const Risk = styled.View`
 `;
 export function Timer() {
   const { date } = useContext(AppContext);
-  const diff = new Date().getTime() - date.getTime();
-  const [state, setState] = useState({
-    sec: Math.floor((diff / 1000) % 60),
-    min: Math.floor((diff / 1000 / 60) % 60),
-    hour: Math.floor((diff / 1000 / 60 / 60) % 24),
-    day: Math.floor(diff / 1000 / 60 / 60 / 24)
-  });
+  const setDate = () => {
+    const diff = new Date().getTime() - date.getTime();
+    return {
+      sec: Math.floor((diff / 1000) % 60),
+      min: Math.floor((diff / 1000 / 60) % 60),
+      hour: Math.floor((diff / 1000 / 60 / 60) % 24),
+      day: Math.floor(diff / 1000 / 60 / 60 / 24)
+    };
+  };
+  const [state, setState] = useState(setDate());
 
   useEffect(() => {
     const timer = setInterval(() => {
@@ -67,11 +70,24 @@ export function Timer() {
     };
   }, [state]);
 
+  useEffect(() => {
+    AppState.addEventListener("change", handleChange);
+    return () => {
+      AppState.removeEventListener("change", handleChange);
+    };
+  }, []);
+
+  const handleChange = newState => {
+    if (newState === "active") {
+      setState(setDate())
+    }
+  };
+
   let padToTwo = number => (number <= 9 ? `0${number}` : number);
 
   const riskHeader =
     state.day < 6 ? "High Risk" : state.day < 11 ? "Medium Risk" : "Low Risk";
-  const livesSaved = Math.pow(2.5, state.day)
+  const livesSaved = Math.pow(2.5, state.day);
   return (
     <Container>
       {date && (

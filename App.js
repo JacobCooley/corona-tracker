@@ -17,8 +17,8 @@ const ButtonView = styled(FlexRow)`
   justify-content: space-around;
   align-items: flex-end;
   width: 100%;
-  margin-bottom: 40px;
-  height: 10%;
+  margin-top: 30px;
+  margin-bottom: 30px;
 `;
 const App = () => {
   const [state, setState] = useReducer(
@@ -37,7 +37,7 @@ const App = () => {
       else setPage(Pages.SETUP);
     })();
   }, []);
-
+  
   const NavButtons =
     page === Pages.TIMER ? (
       <StyledButton title={"Setup"} onPress={() => setPage(Pages.SETUP)} />
