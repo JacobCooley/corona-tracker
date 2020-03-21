@@ -7,6 +7,7 @@ import styled from "styled-components";
 const HeaderText = styled.Text`
   font-size: 20px;
   font-weight: bold;
+  text-align: left;
 `;
 
 const DescText = styled.Text`
