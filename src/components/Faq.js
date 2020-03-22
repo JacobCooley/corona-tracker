@@ -7,6 +7,7 @@ import styled from "styled-components";
 const HeaderText = styled.Text`
   font-size: 20px;
   font-weight: bold;
+  float: left;
   text-align: left;
 `;
 
@@ -131,7 +132,7 @@ export function Faq() {
               ((1*2.5)*15.625) = 39.0625
             </DescText>
             <HeaderText>
-              What is the formula for Estimated Lives Saved?
+              What is the mortality rate for SARS-CoV-2?
             </HeaderText>
             <DescText>
               The Center for Disease Control and Prevention (CDC) estimates that
