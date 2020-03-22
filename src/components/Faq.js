@@ -7,8 +7,9 @@ import styled from "styled-components";
 const HeaderText = styled.Text`
   font-size: 20px;
   font-weight: bold;
-  float: left;
   text-align: left;
+  flex: 1;
+  align-self: stretch;
 `;
 
 const DescText = styled.Text`
@@ -19,7 +20,7 @@ const DescText = styled.Text`
 export function Faq() {
   return (
     <Container justifyContent={"center"} flex={1}>
-      <View style={{ height: "100%", paddingLeft: 20, paddingRight: 20 }}>
+      <View style={{ height: "100%", paddingLeft: 20, paddingRight: 20, justifyContent: 'flex-start', alignItems: 'flex-start' }}>
         <ScrollView style={{}}>
           <FlexCol>
             <Header style={{ marginTop: 40, marginBottom: 40 }} color="black">
@@ -131,9 +132,7 @@ export function Faq() {
               ((1*2.5)*2.5) = 6.25 Day 3 = ((1*2.5)*6.25) = 15.625 Day 4 =
               ((1*2.5)*15.625) = 39.0625
             </DescText>
-            <HeaderText>
-              What is the mortality rate for SARS-CoV-2?
-            </HeaderText>
+            <HeaderText>What is the mortality rate for SARS-CoV-2?</HeaderText>
             <DescText>
               The Center for Disease Control and Prevention (CDC) estimates that
               the mortality rate for COVID-19 is between 0.25% - 3.0% varying

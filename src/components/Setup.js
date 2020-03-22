@@ -32,7 +32,6 @@ export function Setup() {
       />
     );
   };
-
   return (
     <Container justifyContent={"center"}>
       <Text style={{ fontSize: 22, textAlign: "center", marginBottom: 20 }}>
@@ -48,30 +47,47 @@ export function Setup() {
           justifyContent: "space-evenly"
         }}
       >
-        <FlexCol>
-          <Text>Date of last exposure</Text>
-          <View style={{ width: "90%" }}>
-            <Button
-              onPress={() => {
-                setMode("date");
-                setShow(true);
-              }}
-              title={"Set Date"}
-            />
-          </View>
-        </FlexCol>
-        <FlexCol>
-          <Text>Time of last exposure</Text>
-          <View style={{ width: "90%" }}>
-            <Button
-              onPress={() => {
-                setMode("time");
-                setShow(true);
-              }}
-              title={"Set Time"}
-            />
-          </View>
-        </FlexCol>
+        {Platform.OS === "ios" ? (
+          <FlexCol>
+            <Text>Date and time of last exposure</Text>
+            <View style={{ width: "90%" }}>
+              <Button
+                onPress={() => {
+                  setMode("datetime");
+                  setShow(true);
+                }}
+                title={"Set Date/Time"}
+              />
+            </View>
+          </FlexCol>
+        ) : (
+          <>
+            <FlexCol>
+              <Text>Date of last exposure</Text>
+              <View style={{ width: "90%" }}>
+                <Button
+                  onPress={() => {
+                    setMode("date");
+                    setShow(true);
+                  }}
+                  title={"Set Date"}
+                />
+              </View>
+            </FlexCol>
+            <FlexCol>
+              <Text>Time of last exposure</Text>
+              <View style={{ width: "90%" }}>
+                <Button
+                  onPress={() => {
+                    setMode("time");
+                    setShow(true);
+                  }}
+                  title={"Set Time"}
+                />
+              </View>
+            </FlexCol>
+          </>
+        )}
       </View>
       {__DEV__ && (
         <View style={{ marginTop: 20 }}>
@@ -84,13 +100,7 @@ export function Setup() {
           />
         </View>
       )}
-      {show && Platform.OS === "ios" ? (
-        <Modal visible={show} onDismiss={() => setShow(false)}>
-          {datePicker()}
-        </Modal>
-      ) : (
-        show && datePicker()
-      )}
+      {show && datePicker()}
     </Container>
   );
 }
