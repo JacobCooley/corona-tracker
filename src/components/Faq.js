@@ -112,37 +112,6 @@ export function Faq() {
                 Learn more about the necessity to act now here
               </Anchor>
             </DescText>
-            <HeaderText>What is the formula for risk factors?</HeaderText>
-            <DescText>
-              The range of conditions for identifying risk factors related to a
-              person’s “quarantined time” include location, population density,
-              social activities including employment and living conditions. Just
-              like human fingerprints, no two people share identical lifestyles.
-              To begin we are estimating that the average infected person could
-              interact with 2.5 other people per day. Researchers from Arizona
-              demonstrated that when a substance was put on the door handle of
-              an office building, it took less than four hours for the entire
-              building to become infected, including every floor, bathroom,
-              kitchen and office. We believe our estimate of 2.5 infections per
-              day is conservative. The other factor related to risk factors is
-              that once Person A infects 2.5 other people on Day 1, there is a
-              compounding effect which means that the newly infected people
-              could each infect another 2.5 people on Day 2. So our transmission
-              rate formula looks like this- Day 1 = (1*2.5) = 2.5 Day 2 =
-              ((1*2.5)*2.5) = 6.25 Day 3 = ((1*2.5)*6.25) = 15.625 Day 4 =
-              ((1*2.5)*15.625) = 39.0625
-            </DescText>
-            <HeaderText>What is the mortality rate for SARS-CoV-2?</HeaderText>
-            <DescText>
-              The Center for Disease Control and Prevention (CDC) estimates that
-              the mortality rate for COVID-19 is between 0.25% - 3.0% varying
-              greatly based on age and underlying health issues.
-              <Anchor
-                href={"https://wwwnc.cdc.gov/eid/article/26/6/20-0320_article"}
-              >
-                Learn more about the mortality rate from the CDC here
-              </Anchor>
-            </DescText>
           </FlexCol>
         </ScrollView>
       </View>

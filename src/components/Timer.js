@@ -79,7 +79,7 @@ export function Timer() {
 
   const handleChange = newState => {
     if (newState === "active") {
-      setState(setDate())
+      setState(setDate());
     }
   };
 
@@ -87,7 +87,7 @@ export function Timer() {
 
   const riskHeader =
     state.day < 6 ? "High Risk" : state.day < 11 ? "Medium Risk" : "Low Risk";
-  const livesSaved = Math.pow(2.5, state.day);
+  const livesSaved = (10 * state.day) + (state.hour + 1 / 24);
   return (
     <Container>
       {date && (
@@ -101,7 +101,9 @@ export function Timer() {
             <ClockText>{padToTwo(state.min) + " : "}</ClockText>
             <ClockText>{padToTwo(state.sec)}</ClockText>
           </FlexRow>
-          <Text style={{ flex: 1, fontSize: 18 }}>Since last exposure</Text>
+          <Text style={{ flex: 1, fontSize: 18 }}>
+            Since last exposure to the public
+          </Text>
           <Text style={{ flex: 1, fontSize: 16 }}>
             You've saved {livesSaved.toFixed(2)} lives
           </Text>

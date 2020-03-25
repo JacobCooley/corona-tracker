@@ -19,6 +19,7 @@ export function Setup() {
         value={date || new Date()}
         mode={mode}
         maximumDate={new Date()}
+        minimumDate={new Date(2019, 11, 1)}
         is24Hour={true}
         display="default"
         onChange={e => {
